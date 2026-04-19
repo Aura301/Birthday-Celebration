@@ -210,6 +210,43 @@ body::before{
   position:relative;
   z-index:1;
 }
+
+#tapOverlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#0b0f1a;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
+  cursor:pointer;
+  text-align:center;
+}
+
+#tapOverlay h2{
+  font-family:'Orbitron', sans-serif;
+  font-size:28px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+  animation:blink 1.2s infinite;
+}
+
+#tapOverlay p{
+  color:#9ca3af;
+  font-size:14px;
+}
+
+/* animasi kedip */
+@keyframes blink{
+  0%,100%{opacity:1}
+  50%{opacity:0.3}
+}
+
+#tapOverlay h2{
+  text-shadow:0 0 10px red, 0 0 20px red;
+}
 </style>
 </head>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
@@ -217,6 +254,10 @@ body::before{
 <body>
 
 <!-- SCREEN 1 -->
+ <div id="tapOverlay">
+  <h2>🏁 Tap Anywhere</h2>
+  <p>to start the experience</p>
+</div>
 <div id="screen1" class="screen">
   <div class="dashboardWrap">
 
@@ -428,6 +469,17 @@ function restartGame(){
 function openMaps(){
   window.open("https://maps.app.goo.gl/oJ4rP3qHFkHCgagaA", "_blank");
 }
+
+const tapOverlay = document.getElementById("tapOverlay");
+
+tapOverlay.addEventListener("click", () => {
+  bgSound.play(); // 🔊 start audio
+
+  tapOverlay.style.opacity = "0";
+  setTimeout(()=>{
+    tapOverlay.style.display = "none";
+  },500);
+});
 </script>
 
 </body>
